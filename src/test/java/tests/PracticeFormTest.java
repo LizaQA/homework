@@ -10,20 +10,11 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class PracticeFormTest {
-
     @BeforeAll
     static void beforeAll() {
         Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1680x1050";
+        Configuration.browserSize = "1920x1080";
     }
-
-    public static void setDate(int day, int month, int year){
-        $(".react-datepicker-wrapper").click();
-        $(".react-datepicker__month-select").selectOptionByValue(String.valueOf(month));
-        $(".react-datepicker__year-select").selectOptionByValue(String.valueOf(year));
-        $(".react-datepicker__day--0" + day).click();
-    }
-
     @Test
     void successfulSearchTest() throws ClassNotFoundException, InterruptedException {
         open("/automation-practice-form");
@@ -40,18 +31,14 @@ public class PracticeFormTest {
         $("[class = react-datepicker__month-select]").selectOptionByValue("2");
         $("[class = react-datepicker__year-select]").selectOptionByValue(String.valueOf("1996"));
         $(".react-datepicker__day--012").click();
-
-      //  $(By.xpath("//div[@class = 'subjects-auto-complete__input']/input")).setValue("English").pressEnter();
         $(By.xpath("//div[@class = 'subjects-auto-complete__input']/input")).setValue("English").pressEnter();
         $(byText("Sports")).click();
         $("#uploadPicture").uploadFromClasspath("dog.png");
         $("[id=currentAddress]").setValue("Home");
-
         $("[id = state]").click();
         $(byText("NCR")).click();
         $("[id = city]").click();
         $(byText("Delhi")).click();
-
         $("[id = submit]").click();
 
         $("[class = modal-content]").shouldHave(
@@ -66,9 +53,5 @@ public class PracticeFormTest {
                 text("Home"),
                 text("NCR Delhi")
                 );
-//    Thread.sleep(1000000000);
-
-
     }
-
 }
