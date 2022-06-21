@@ -8,38 +8,43 @@ import pages.RegistrationFormPages;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
-public class PracticeFormPageObjectTest {
+public class PracticeFormPageObjectTest extends TestBase {
     RegistrationFormPages registrationFormPages = new RegistrationFormPages();
-
-    @BeforeAll
-    static void beforeAll() {
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1920x1080";
-    }
+    String firstName = "Liza";
+    String lastName = "QA";
+    String userEmail = "LizaQA@mail.ru";
+    String userNumber = "79159999999";
+    String day = "12";
+    String month = "2";
+    String year = "1996";
+    String subject = "English";
+    String address = "Home";
+    String state = "NCR";
+    String city = "Delhi";
 
     @Test
     void successfulSearchTest() {
         open("/automation-practice-form");
         registrationFormPages.deleteElements()
-                .setFirstName("liza")
-                .setLastName("QA")
-                .setUserEmail("LizaQA@mail.ru")
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setUserEmail(userEmail)
                 .setGender()
-                .setUserNumber("79159999999")
-                .setDate("12", "2", "1996")
-                .setSubject("English")
+                .setUserNumber(userNumber)
+                .setDate(day, month, year)
+                .setSubject(subject)
                 .setHobbies()
                 .setPictures()
-                .setAddress("Home")
-                .setState("NCR")
-                .setCity("Delhi")
+                .setAddress(address)
+                .setState(state)
+                .setCity(city)
                 .clickSubmit();
 
         $("[class = modal-content]").shouldHave(
                 text("Liza QA"),
                 text("LizaQA@mail.ru"),
                 text("Female"),
-                text("7915999999"),
+                text("79159999999"),
                 text("12 March,1996"),
                 text("English"),
                 text("Sports"),
