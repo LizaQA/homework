@@ -29,7 +29,7 @@ public class PracticeFormPageObjectTest extends TestBase {
                 .setFirstName(firstName)
                 .setLastName(lastName)
                 .setUserEmail(userEmail)
-                .setGender()
+                .setGender("Male")
                 .setUserNumber(userNumber)
                 .setDate(day, month, year)
                 .setSubject(subject)
