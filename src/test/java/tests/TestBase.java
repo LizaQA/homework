@@ -15,11 +15,12 @@ public class TestBase {
     String userEmail =getRandomEmail();
     String address = faker.witcher().quote() ;
     String userNumber = "9154328356";
-    String gender = getRandomGender();
+    protected String gender = getRandomGender();
     String day = String.valueOf(getRandomInt(10, 30));
     String month = String.valueOf(getRandomInt(1,9));
     String year = "1996";
-    String subject = "English";
+    protected String subject = "English";
+    protected String hobbies = "Sports";
     String state = "NCR";
     String city = "Delhi";
     @BeforeAll
