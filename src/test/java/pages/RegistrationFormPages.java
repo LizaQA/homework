@@ -1,83 +1,91 @@
 package pages;
 
+import com.codeborne.selenide.SelenideElement;
 import pages.components.CalenderComponent;
 import pages.components.ResultsTableComponent;
+import tests.TestBase;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 
-public class RegistrationFormPages {
+public class RegistrationFormPages extends TestBase {
+    SelenideElement firstNameLocator = $("#firstName");
+    SelenideElement genderLocator = $(byText(gender));
+    SelenideElement lastNameLocator = $("#lastName");
+    SelenideElement userEmailLocator = $("#userEmail");
+    SelenideElement userNumberLocator = $("#userNumber");
+    SelenideElement subjectsInputLocator = $("#subjectsInput");
+    SelenideElement sportsLocator = $(byText(hobbies));
+    SelenideElement uploadPictureLocator = $("#uploadPicture");
+    SelenideElement currentAddressLocator = $("#currentAddress");
+    SelenideElement submitLocator = $("#submit");
+    SelenideElement stateLocator = $("#state");
+    SelenideElement cityLocator = $("#city");
+    SelenideElement dateOfBirthInputLocator = $("#dateOfBirthInput");
+    SelenideElement modalContentLocator = $(".modal-content");
     CalenderComponent calenderComponent = new CalenderComponent();
     ResultsTableComponent resultsTableComponent = new ResultsTableComponent();
 
     public RegistrationFormPages setFirstName(String name) {
-        $("#firstName").setValue(name);
+        firstNameLocator.setValue(name);
         return this;
     }
 
-    public RegistrationFormPages setGender(String gender) {
-        $(byText(gender)).click();
+    public RegistrationFormPages setGender() {
+        genderLocator.click();
         return this;
     }
 
     public RegistrationFormPages setLastName(String name) {
-        $("#lastName").setValue(name);
+        lastNameLocator.setValue(name);
         return this;
     }
 
     public RegistrationFormPages setUserEmail(String email) {
-        $("#userEmail").setValue(email);
+        userEmailLocator.setValue(email);
         return this;
     }
 
     public RegistrationFormPages setUserNumber(String number) {
-        $("#userNumber").setValue(number);
-        return this;
-    }
-
-    public RegistrationFormPages setDate(String day, String month, String year) {
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").selectOptionByValue(month);
-        $(".react-datepicker__year-select").selectOptionByValue(year);
-        $(".react-datepicker__day--0" + day).click();
+        userNumberLocator.setValue(number);
         return this;
     }
 
     public RegistrationFormPages setSubject(String subject) {
-        $("#subjectsInput").setValue(subject).pressEnter();
+        subjectsInputLocator.setValue(subject).pressEnter();
         return this;
     }
 
     public RegistrationFormPages setHobbies() {
-        $(byText("Sports")).click();
+        sportsLocator.click();
         return this;
     }
 
     public RegistrationFormPages setPictures() {
-        $("#uploadPicture").uploadFromClasspath("dog.png");
+        uploadPictureLocator.uploadFromClasspath("dog.png");
         return this;
     }
 
     public RegistrationFormPages setAddress(String address) {
-        $("#currentAddress").setValue(address);
+        currentAddressLocator.setValue(address);
         return this;
     }
 
     public RegistrationFormPages setState(String state) {
-        $("#state").click();
+        stateLocator.click();
         $(byText(state)).click();
         return this;
     }
 
     public RegistrationFormPages setCity(String city) {
-        $("#city").click();
+        cityLocator.click();
         $(byText(city)).click();
         return this;
     }
 
     public RegistrationFormPages clickSubmit() {
-        $("#submit").click();
+        submitLocator.click();
         return this;
     }
 
@@ -89,12 +97,13 @@ public class RegistrationFormPages {
     }
 
     public RegistrationFormPages setDateOfBirth(String day, String month, String year) {
-        $("#dateOfBirthInput").click();
-        calenderComponent.setDate("12", "2", "1996");
+        dateOfBirthInputLocator.click();
+        calenderComponent.setDate(day, month, year);
         return this;
     }
 
-    public void checkResult(String key, String value) {
+    public RegistrationFormPages checkResult(String key, String value) {
         resultsTableComponent.checkResult(key, value);
+        return this;
     }
 }
