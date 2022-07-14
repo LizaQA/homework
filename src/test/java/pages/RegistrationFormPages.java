@@ -75,22 +75,25 @@ public class RegistrationFormPages {
         $(byText(city)).click();
         return this;
     }
+
     public RegistrationFormPages clickSubmit() {
         $("#submit").click();
         return this;
     }
+
     public RegistrationFormPages deleteElements() {
         executeJavaScript("$('header').remove()");
         executeJavaScript("$('.playgound-header').remove()");
         executeJavaScript("$('footer').remove()");
         return this;
     }
+
     public RegistrationFormPages setDateOfBirth(String day, String month, String year) {
         $("#dateOfBirthInput").click();
         calenderComponent.setDate("12", "2", "1996");
-
         return this;
     }
+
     public void checkResult(String key, String value) {
         resultsTableComponent.checkResult(key, value);
     }

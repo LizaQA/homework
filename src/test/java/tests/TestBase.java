@@ -16,7 +16,7 @@ public class TestBase {
     String address = faker.witcher().quote() ;
     String userNumber = "9154328356";
     String gender = getRandomGender();
-    String day = "" + getRandomInt(10, 30);
+    String day = String.valueOf(getRandomInt(10, 30));
     String month = String.valueOf(getRandomInt(1,9));
     String year = "1996";
     String subject = "English";
