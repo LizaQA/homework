@@ -1,26 +1,18 @@
 package tests;
 
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationFormPages;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.*;
+import java.util.Locale;
 
-public class PracticeFormPageObjectTest extends TestBase {
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
+import static utils.RandomUtils.*;
+
+public class RegistrationFormWithFakerTests extends TestBase {
     RegistrationFormPages registrationFormPages = new RegistrationFormPages();
-    String firstName = "Liza";
-    String lastName = "QA";
-    String userEmail = "LizaQA@mail.ru";
-    String userNumber = "79159999999";
-    String day = "12";
-    String month = "2";
-    String year = "1996";
-    String subject = "English";
-    String address = "Home";
-    String state = "NCR";
-    String city = "Delhi";
 
     @Test
     void successfulSearchTest() {
@@ -29,7 +21,7 @@ public class PracticeFormPageObjectTest extends TestBase {
                 .setFirstName(firstName)
                 .setLastName(lastName)
                 .setUserEmail(userEmail)
-                .setGender()
+                .setGender(gender)
                 .setUserNumber(userNumber)
                 .setDate(day, month, year)
                 .setSubject(subject)
@@ -41,16 +33,16 @@ public class PracticeFormPageObjectTest extends TestBase {
                 .clickSubmit();
 
         $("[class = modal-content]").shouldHave(
-                text("Liza QA"),
-                text("LizaQA@mail.ru"),
-                text("Female"),
-                text("79159999999"),
-                text("12 March,1996"),
-                text("English"),
+                text(firstName + " " +lastName),
+                text(userNumber),
+                text(gender),
+                text(userNumber),
+                text(subject),
                 text("Sports"),
                 text("dog.png"),
-                text("Home"),
+                text(address ),
                 text("NCR Delhi")
         );
     }
 }
+

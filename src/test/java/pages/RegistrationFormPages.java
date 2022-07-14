@@ -1,24 +1,23 @@
 package pages;
 
-import org.openqa.selenium.By;
 import pages.components.CalenderComponent;
 import pages.components.ResultsTableComponent;
 
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class RegistrationFormPages {
-    CalenderComponent calenderComponent = new CalenderComponent ();
+    CalenderComponent calenderComponent = new CalenderComponent();
     ResultsTableComponent resultsTableComponent = new ResultsTableComponent();
+
     public RegistrationFormPages setFirstName(String name) {
         $("#firstName").setValue(name);
         return this;
     }
 
-    public RegistrationFormPages setGender() {
-        $(byText("Female")).click();
+    public RegistrationFormPages setGender(String gender) {
+        $(byText(gender)).click();
         return this;
     }
 
@@ -91,12 +90,11 @@ public class RegistrationFormPages {
 
     public RegistrationFormPages setDateOfBirth(String day, String month, String year) {
         $("#dateOfBirthInput").click();
-       calenderComponent.setDate("12","2","1996");
-
+        calenderComponent.setDate("12", "2", "1996");
         return this;
     }
-    public void checkResult (String key, String value) {
 
+    public void checkResult(String key, String value) {
         resultsTableComponent.checkResult(key, value);
     }
 }
